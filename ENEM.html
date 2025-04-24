@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <title>StudySim - Simulados Inteligentes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Tela de Login -->
+    <div class="login-container" id="loginScreen">
+        <div class="login-box">
+            <h1>StudySim</h1>
+            <input type="email" id="email" placeholder="E-mail">
+            <input type="password" id="password" placeholder="Senha">
+            <button class="login-btn" id="loginBtn">Entrar</button>
+            <button class="skip-login" id="skipLogin">Pular login e começar</button>
+        </div>
+    </div>
+    
+    <!-- Tela Principal -->
+    <div class="main-container" id="mainScreen">
+        <header>
+            <div class="logo">StudySim</div>
+            <div class="user-menu">
+                <img src="https://via.placeholder.com/40" alt="Usuário" id="userAvatar">
+                <span id="userName">Visitante</span>
+            </div>
+        </header>
+        
+        <div class="container">
+            <div class="dashboard">
+                <div class="sidebar">
+                    <ul>
+                        <li class="active" data-section="home">
+                            <i class="fas fa-home"></i> Início
+                        </li>
+                        <li data-section="simulado">
+                            <i class="fas fa-clipboard-list"></i> Simulados
+                        </li>
+                        <li data-section="profile">
+                            <i class="fas fa-chart-line"></i> Desempenho
+                        </li>
+                        <li data-section="books">
+                            <i class="fas fa-book"></i> Livros
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="content">
+                    <!-- Página Inicial -->
+                    <div class="home-container" id="homeSection">
+                        <div class="welcome-section">
+                            <h2>Bem-vindo ao StudySim!</h2>
+                            <p>Seu assistente inteligente para simulados e plano de estudos personalizado.</p>
+                        </div>
+                        
+                        <div class="stats-summary">
+                            <div class="stat-card">
+                                <h3>Simulados Completos</h3>
+                                <p id="totalSimulados">0</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>Média de Acertos</h3>
+                                <p id="mediaAcertos">0%</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>Questões Respondidas</h3>
+                                <p id="totalQuestoes">0</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>Dias de Estudo</h3>
+                                <p id="diasEstudo">1</p>
+                            </div>
+                        </div>
+                        
+                        <div class="action-cards">
+                            <div class="card" id="startSimuladoBtn">
+                                <div class="card-header">
+                                    <i class="fas fa-clipboard-list"></i>
+                                    <h3>Iniciar Simulado</h3>
+                                </div>
+                                <p>Teste seus conhecimentos com questões do ENEM e vestibulares</p>
+                                <div class="card-footer">
+                                    <span>10-90 questões</span>
+                                    <span class="badge">Novo</span>
+                                </div>
+                            </div>
+                            
+                            <div class="card" data-section="profile">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-line"></i>
+                                    <h3>Meu Desempenho</h3>
+                                </div>
+                                <p>Veja seu progresso e relatórios detalhados</p>
+                                <div class="card-footer">
+                                    <span>Atualizado hoje</span>
+                                </div>
+                            </div>
+                            
+                            <div class="card" data-section="books">
+                                <div class="card-header">
+                                    <i class="fas fa-book"></i>
+                                    <h3>Livros Recomendados</h3>
+                                </div>
+                                <p>Baseado no seu desempenho nos simulados</p>
+                                <div class="card-footer">
+                                    <span>5 recomendações</span>
+                                </div>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <h3>Plano de Estudos</h3>
+                                </div>
+                                <p>Personalizado para suas necessidades</p>
+                                <div class="card-footer">
+                                    <span>7 dias</span>
+                                    <span class="badge">Em breve</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Página de Simulado -->
+                    <div class="simulado-container" id="simuladoSection">
+                        <div class="simulado-header">
+                            <h2>Simulado ENEM</h2>
+                            <div class="simulado-timer">
+                                <i class="fas fa-clock"></i> 00:00
+                            </div>
+                        </div>
+                        
+                        <p>Questão <span id="currentQuestion">1</span> de <span id="totalQuestions">10</span></p>
+                        
+                        <div class="question-container">
+                            <div class="question-text" id="questionText"></div>
+                            <div class="options-container" id="optionsContainer"></div>
+                        </div>
+                        
+                        <div class="navigation-buttons">
+                            <button class="nav-btn" id="prevBtn" disabled>Anterior</button>
+                            <button class="nav-btn" id="nextBtn">Próxima</button>
+                            <button class="nav-btn" id="finishBtn" style="display: none;">Finalizar Simulado</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Página de Perfil e Relatórios -->
+                    <div class="profile-container" id="profileSection">
+                        <div class="user-info">
+                            <img src="https://via.placeholder.com/100" alt="Usuário" id="profileAvatar">
+                            <div>
+                                <h2 id="profileName">Visitante</h2>
+                                <p>Nível: <span id="userLevel">Iniciante</span></p>
+                            </div>
+                        </div>
+                        
+                        <h3>Seu Desempenho</h3>
+                        <div class="stats-container">
+                            <div class="stat-card">
+                                <h3>Simulados Completos</h3>
+                                <p id="completedTests">0</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>Média de Acertos</h3>
+                                <p id="averageScore">0%</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>Melhor Área</h3>
+                                <p id="bestArea">-</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>Área para Melhorar</h3>
+                                <p id="worstArea">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
